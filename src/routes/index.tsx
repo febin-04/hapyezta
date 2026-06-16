@@ -331,7 +331,7 @@ function Index() {
             </a>
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {[p1, p2, p3, p4, p5, p7].map((img, i) => (
+            {products.slice(0, 6).map((p, i) => (
               <a
                 key={i}
                 href="https://www.instagram.com/hapyezta?igsh=ZDN6ZGNhMXZpdmpt"
@@ -339,7 +339,7 @@ function Index() {
                 rel="noopener noreferrer"
                 className="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 block shadow-sm hover:shadow-md"
               >
-                <img src={img} alt="Instagram shop item" loading="lazy" width={400} height={400} className="w-full h-full object-cover" />
+                <img src={p.img} alt="Instagram shop item" loading="lazy" width={400} height={400} className="w-full h-full object-cover" />
               </a>
             ))}
           </div>
