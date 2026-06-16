@@ -322,15 +322,35 @@ function Index() {
 
       {/* Instagram */}
       <section id="insta" className="py-16 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="text-teal font-semibold tracking-widest text-xs uppercase flex items-center justify-center gap-2">
+        <div className="max-w-7xl mx-auto text-center animate-fade-in">
+          <a
+            href="https://www.instagram.com/hapyezta?igsh=ZDN6ZGNhMXZpdmpt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-teal font-semibold tracking-widest text-xs uppercase hover:text-coral transition-colors duration-200"
+          >
             <Instagram className="w-4 h-4" /> @hapyezta
-          </div>
-          <h2 className="font-display text-4xl sm:text-5xl text-purple mt-2 mb-8">Instagram shop</h2>
+          </a>
+          <h2 className="font-display text-4xl sm:text-5xl text-purple mt-2 mb-8">
+            <a
+              href="https://www.instagram.com/hapyezta?igsh=ZDN6ZGNhMXZpdmpt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-coral transition-colors duration-200"
+            >
+              Instagram shop
+            </a>
+          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {[p1, p2, p3, p4, p5, p7].map((img, i) => (
-              <a key={i} href="#" className="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition block">
-                <img src={img} alt="" loading="lazy" width={400} height={400} className="w-full h-full object-cover" />
+              <a
+                key={i}
+                href="https://www.instagram.com/hapyezta?igsh=ZDN6ZGNhMXZpdmpt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 block shadow-sm hover:shadow-md"
+              >
+                <img src={img} alt="Instagram shop item" loading="lazy" width={400} height={400} className="w-full h-full object-cover" />
               </a>
             ))}
           </div>
