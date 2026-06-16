@@ -114,9 +114,9 @@ function Index() {
             <a href="#insta" className="hover:text-coral transition">Reviews</a>
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
-            <button className="p-2 hover:text-coral"><Search className="w-5 h-5" /></button>
+            <button className="p-2 hover:text-coral hidden lg:block"><Search className="w-5 h-5" /></button>
             <button className="p-2 hover:text-coral hidden sm:block"><Heart className="w-5 h-5" /></button>
-            <button className="p-2 hover:text-coral relative">
+            <button className="p-2 hover:text-coral relative hidden lg:block">
               <ShoppingBag className="w-5 h-5" />
               <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center">3</span>
             </button>
