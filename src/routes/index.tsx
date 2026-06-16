@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Search, ShoppingBag, Heart, Menu, Instagram, Star, Truck, Sparkles } from "lucide-react";
+import { Search, ShoppingBag, Heart, Instagram, Star, Truck, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import hero from "@/assets/hero.jpg";
 import heroSlide1 from "@/assets/hero_slide_1.png";
@@ -85,7 +85,6 @@ function Index() {
 
       <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-          <button className="lg:hidden p-2"><Menu className="w-6 h-6 text-purple" /></button>
           <a href="/" className="hover:opacity-90 transition py-1">
             <Logo size="sm" withSlogan={true} className="items-start" />
           </a>
