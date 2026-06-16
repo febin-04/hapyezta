@@ -1,0 +1,382 @@
+import { useState, useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Search, ShoppingBag, Heart, Menu, Instagram, Star, Truck, Sparkles } from "lucide-react";
+import { Logo } from "@/components/Logo";
+import hero from "@/assets/hero.jpg";
+import heroSlide1 from "@/assets/hero_slide_1.png";
+import heroSlide2 from "@/assets/hero_slide_2.png";
+import heroSlide3 from "@/assets/hero_slide_3.png";
+import p1 from "@/assets/p1.jpg";
+import p2 from "@/assets/p2.jpg";
+import p3 from "@/assets/p3.jpg";
+import p4 from "@/assets/p4.jpg";
+import p5 from "@/assets/p5.jpg";
+import p6 from "@/assets/p6.jpg";
+import p7 from "@/assets/p7.jpg";
+import p8 from "@/assets/p8.jpg";
+import c1 from "@/assets/c1.jpg";
+import c2 from "@/assets/c2.jpg";
+import c3 from "@/assets/c3.jpg";
+import c4 from "@/assets/c4.jpg";
+import c5 from "@/assets/c5.jpg";
+import c6 from "@/assets/c6.jpg";
+import c7 from "@/assets/c7.jpg";
+import c8 from "@/assets/c8.jpg";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Hapyezta" },
+      { name: "description", content: "Shop adorable kawaii stationery, pencil cases, journals, water bottles and gift sets. Pan-India delivery on the cutest collection in town." },
+      { property: "og:title", content: "Hapyezta" },
+      { property: "og:description", content: "Adorable kawaii stationery, journals & gift sets. Pan-India delivery." },
+    ],
+    links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" },
+    ],
+  }),
+  component: Index,
+});
+
+const categories = [
+  { name: "Cute Stationery", img: c1, color: "var(--teal)" },
+  { name: "Pencil Cases", img: c2, color: "var(--coral)" },
+  { name: "Journal Supplies", img: c3, color: "var(--yellow)" },
+  { name: "Sling & School Bags", img: c4, color: "var(--purple)" },
+  { name: "Bottles & Tumblers", img: c5, color: "var(--orange)" },
+  { name: "Lunch Box", img: c6, color: "var(--coral)" },
+  { name: "Gift Sets", img: c7, color: "var(--teal)" },
+  { name: "Makeup Pouches", img: c8, color: "var(--purple)" },
+];
+
+const products = [
+  { name: "Kawaii Mini Clay Cupcakes", price: "₹499", old: "₹699", img: p1, tag: "Sale" },
+  { name: "Kawaii Duck Organizer", price: "₹799", img: p2, tag: "New" },
+  { name: "Kawaii Bear Pen Holder", price: "₹399", img: p3 },
+  { name: "Kawaii Puppy Lunch Bag", price: "₹699", old: "₹999", img: p4, tag: "Sale" },
+  { name: "Kawaii Water Bottle", price: "₹549", img: p5 },
+  { name: "Aesthetic Sticker Pack", price: "₹199", img: p6 },
+  { name: "Girly Hearts Stickers", price: "₹299", img: p7 },
+  { name: "Lavender Journal Kit", price: "₹599", img: p8, tag: "Hot" },
+];
+
+const testimonials = [
+  {
+    name: "Aarushi K.",
+    emoji: "👧",
+    stars: 5,
+    text: "I ordered the lavender journal kit and it's absolutely the cutest thing I own. Packaging was so thoughtful — felt like unwrapping a present. Will be ordering again very soon!",
+  },
+  {
+    name: "Kabir M.",
+    emoji: "👦",
+    stars: 5,
+    text: "The Kawaii Duck Organizer is perfect for my study desk! It holds all my pastel markers and looks so adorable. Shipping was super fast too. Highly recommended!",
+  },
+  {
+    name: "Ananya S.",
+    emoji: "👩",
+    stars: 5,
+    text: "Absolutely in love with the sticker packs and school bags! The quality of the prints is amazing, and my daughter is so happy with her new puppy lunch bag. 10/10!",
+  },
+];
+
+function Index() {
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+  const heroImages = [hero, heroSlide1, heroSlide2, heroSlide3];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background pb-16 lg:pb-0">
+      <div className="bg-purple text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
+        ✨ Free shipping above ₹999 · Pan-India delivery · COD available ✨
+      </div>
+
+      <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+          <button className="lg:hidden p-2"><Menu className="w-6 h-6 text-purple" /></button>
+          <a href="/" className="hover:opacity-90 transition py-1">
+            <Logo size="sm" withSlogan={true} className="items-start" />
+          </a>
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-foreground/80">
+            <a href="#collection" className="hover:text-coral transition">Shop</a>
+            <a href="#featured" className="hover:text-coral transition">New In</a>
+            <a href="#collection" className="hover:text-coral transition">Stationery</a>
+            <a href="#collection" className="hover:text-coral transition">Gift Sets</a>
+            <a href="#insta" className="hover:text-coral transition">Reviews</a>
+          </nav>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button className="p-2 hover:text-coral"><Search className="w-5 h-5" /></button>
+            <button className="p-2 hover:text-coral hidden sm:block"><Heart className="w-5 h-5" /></button>
+            <button className="p-2 hover:text-coral relative">
+              <ShoppingBag className="w-5 h-5" />
+              <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center">3</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 pt-10 pb-16 grid lg:grid-cols-2 gap-10 items-center">
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 bg-yellow/30 text-purple px-4 py-1.5 rounded-full text-sm font-semibold mb-5">
+              <Sparkles className="w-4 h-4" /> Back to School Drop
+            </div>
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-purple">
+              Cute things,<br />
+              <span className="text-coral">big smiles.</span>
+            </h1>
+            <p className="mt-5 text-lg text-foreground/70 max-w-md">
+              Kawaii stationery, dreamy journals & gift sets handpicked to make every desk a little happier.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="#collection" className="px-7 py-3.5 rounded-full bg-coral text-white font-bold shadow-[0_6px_0_0_#c4513f] hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#c4513f] transition-all">
+                Shop the drop
+              </a>
+              <a href="#featured" className="px-7 py-3.5 rounded-full bg-white border-2 border-purple text-purple font-bold hover:bg-purple hover:text-white transition">
+                New arrivals
+              </a>
+            </div>
+            <div className="mt-8 flex gap-6 text-sm">
+              <div><div className="font-display text-2xl text-teal">500+</div><div className="text-foreground/60">Cute picks</div></div>
+              <div><div className="font-display text-2xl text-orange">10k+</div><div className="text-foreground/60">Happy fans</div></div>
+              <div><div className="font-display text-2xl text-purple">4.9★</div><div className="text-foreground/60">Reviews</div></div>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -top-6 -right-6 w-40 h-40 bg-yellow rounded-full -z-0" />
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-teal rounded-full -z-0" />
+            <div className="relative rounded-[2rem] overflow-hidden border-8 border-white shadow-2xl rotate-[-2deg] aspect-square w-full">
+              {heroImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt="Kawaii stationery collection"
+                  width={1024}
+                  height={1024}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                    index === currentHeroIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="absolute top-4 -left-2 bg-white rounded-2xl shadow-xl px-3 py-2 rotate-[-8deg] text-xs font-bold text-coral flex items-center gap-1.5 z-20">
+              <Star className="w-3 h-3 fill-coral" /> So cute!
+            </div>
+            <div className="absolute bottom-6 -right-2 bg-white rounded-2xl shadow-xl px-3 py-2 rotate-[6deg] text-xs font-bold text-teal flex items-center gap-1.5 z-20">
+              <Truck className="w-3 h-3" /> Free shipping
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Collection */}
+      <section id="collection" className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="text-coral font-semibold tracking-widest text-xs uppercase">Browse</div>
+            <h2 className="font-display text-4xl sm:text-5xl text-purple mt-2">Our Collection</h2>
+            <div className="flex justify-center gap-1 mt-3">
+              <span className="w-2 h-2 rounded-full bg-teal" />
+              <span className="w-2 h-2 rounded-full bg-orange" />
+              <span className="w-2 h-2 rounded-full bg-yellow" />
+              <span className="w-2 h-2 rounded-full bg-purple" />
+              <span className="w-2 h-2 rounded-full bg-coral" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+            {categories.map((c) => (
+              <a key={c.name} href="#" className="group">
+                <div className="aspect-square rounded-3xl overflow-hidden shadow-md group-hover:scale-105 group-hover:-rotate-2 transition-transform p-3" style={{ backgroundColor: c.color }}>
+                  <div className="w-full h-full rounded-2xl overflow-hidden bg-white">
+                    <img src={c.img} alt={c.name} loading="lazy" width={600} height={600} className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div className="mt-3 text-center font-semibold text-sm sm:text-base text-foreground group-hover:text-coral transition">
+                  {c.name}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured */}
+      <section id="featured" className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 gap-4">
+            <div>
+              <div className="text-teal font-semibold tracking-widest text-xs uppercase">Featured</div>
+              <h2 className="font-display text-4xl sm:text-5xl text-purple mt-2">Best Sellers</h2>
+            </div>
+            <div className="flex gap-2">
+              <button className="px-5 py-2 rounded-full bg-purple text-white font-semibold text-sm">Best Sellers</button>
+              <button className="px-5 py-2 rounded-full border-2 border-purple/30 text-purple font-semibold text-sm">New In</button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {products.map((p) => (
+              <article key={p.name} className="bg-cream rounded-3xl overflow-hidden border-2 border-transparent hover:border-coral transition group">
+                <div className="relative aspect-square overflow-hidden bg-white">
+                  {p.tag && (
+                    <span className="absolute top-3 left-3 z-10 bg-coral text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                      {p.tag}
+                    </span>
+                  )}
+                  <button className="absolute top-3 right-3 z-10 w-9 h-9 bg-white rounded-full grid place-items-center text-coral hover:bg-coral hover:text-white transition shadow">
+                    <Heart className="w-4 h-4" />
+                  </button>
+                  <img src={p.img} alt={p.name} loading="lazy" width={800} height={800} className="w-full h-full object-cover group-hover:scale-105 transition" />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-sm sm:text-base text-foreground line-clamp-2 min-h-[2.5rem]">{p.name}</h3>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="font-display text-lg text-purple">{p.price}</span>
+                    {p.old && <span className="text-xs text-foreground/40 line-through">{p.old}</span>}
+                  </div>
+                  <button className="mt-3 w-full py-2 rounded-full bg-purple text-white text-sm font-semibold hover:bg-coral transition">
+                    Add to cart
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <a href="#" className="inline-block px-8 py-3 rounded-full border-2 border-purple text-purple font-bold hover:bg-purple hover:text-white transition">
+              View all →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Banner strip */}
+      <section className="py-12 px-4">
+        <div className="max-w-7xl mx-auto grid sm:grid-cols-3 gap-4">
+          {[
+            { c: "var(--teal)", t: "Free Shipping", s: "On orders ₹999+", icon: <Truck className="w-6 h-6" /> },
+            { c: "var(--orange)", t: "Cash on Delivery", s: "Available across India", icon: <ShoppingBag className="w-6 h-6" /> },
+            { c: "var(--coral)", t: "Loved by 10k+", s: "5-star kawaii fans", icon: <Heart className="w-6 h-6" /> },
+          ].map((b) => (
+            <div key={b.t} className="rounded-3xl p-6 text-white flex items-center gap-4" style={{ backgroundColor: b.c }}>
+              <div className="w-12 h-12 bg-white/25 rounded-2xl grid place-items-center">{b.icon}</div>
+              <div>
+                <div className="font-display text-xl">{b.t}</div>
+                <div className="text-sm opacity-90">{b.s}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 px-4 bg-yellow/20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="text-orange font-semibold tracking-widest text-xs uppercase">Love Notes</div>
+            <h2 className="font-display text-4xl sm:text-5xl text-purple mt-2">What our clients say</h2>
+            <div className="flex justify-center gap-1 mt-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-teal" />
+              <span className="w-2.5 h-2.5 rounded-full bg-orange" />
+              <span className="w-2.5 h-2.5 rounded-full bg-yellow" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-3xl p-6 sm:p-8 shadow-md flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition duration-300 border-2 border-transparent hover:border-yellow/30"
+              >
+                <div>
+                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-coral to-purple grid place-items-center text-2xl mb-4 select-none">
+                    {t.emoji}
+                  </div>
+                  <div className="font-display text-lg text-purple text-center font-semibold">{t.name}</div>
+                  <div className="flex justify-center gap-0.5 my-2.5 text-yellow">
+                    {[...Array(t.stars)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow text-yellow" />
+                    ))}
+                  </div>
+                  <p className="text-foreground/75 italic text-sm leading-relaxed text-center mt-2">
+                    "{t.text}"
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram */}
+      <section id="insta" className="py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="text-teal font-semibold tracking-widest text-xs uppercase flex items-center justify-center gap-2">
+            <Instagram className="w-4 h-4" /> @hapyezta
+          </div>
+          <h2 className="font-display text-4xl sm:text-5xl text-purple mt-2 mb-8">Instagram shop</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {[p1, p2, p3, p4, p5, p7].map((img, i) => (
+              <a key={i} href="#" className="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition block">
+                <img src={img} alt="" loading="lazy" width={400} height={400} className="w-full h-full object-cover" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#5B2D91] text-white pt-14 pb-8 px-4">
+        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <div className="flex flex-col items-start">
+              <Logo size="md" withSlogan={true} className="items-start text-left" />
+            </div>
+            <p className="mt-3 text-sm text-[#E8DDF8]">Spreading kawaii joy, one cute package at a time. Pan-India delivery.</p>
+          </div>
+          <div>
+            <div className="font-display text-lg mb-3 text-white font-semibold">Shop</div>
+            <ul className="space-y-2 text-sm text-[#E8DDF8]">
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Stationery</a></li>
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Journals</a></li>
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Gift sets</a></li>
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Bottles</a></li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-display text-lg mb-3 text-white font-semibold">Help</div>
+            <ul className="space-y-2 text-sm text-[#E8DDF8]">
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Track order</a></li>
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Shipping</a></li>
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Returns</a></li>
+              <li><a href="#" className="hover:text-[#FFB84D] transition">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-display text-lg mb-3 text-white font-semibold">Stay in the loop</div>
+            <p className="text-sm text-[#E8DDF8] mb-3">Get cute drops in your inbox.</p>
+            <form className="flex gap-2">
+              <input type="email" placeholder="you@cute.com" className="flex-1 px-4 py-2 rounded-full bg-white/10 border border-[#E8DDF8]/20 placeholder:text-[#E8DDF8]/50 text-sm text-white outline-none focus:border-[#FFB84D]/50" />
+              <button className="px-4 py-2 rounded-full bg-[#FFB84D] hover:bg-white text-[#5B2D91] transition font-semibold text-sm">Join</button>
+            </form>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-[#E8DDF8]/20 text-center text-xs text-[#E8DDF8]/70">
+          © {new Date().getFullYear()} Hapyezta · Made with 💛 in India
+        </div>
+      </footer>
+    </div>
+  );
+}
