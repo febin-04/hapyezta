@@ -150,7 +150,7 @@ export function MobileNav() {
 
       {/* --- Search Dialog --- */}
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
-        <DialogContent className="sm:max-w-[425px] rounded-t-[2rem] sm:rounded-3xl p-6 bg-cream border-2 border-yellow/30 max-h-[85vh] overflow-y-auto">
+        <DialogContent className="w-[92vw] sm:max-w-[425px] rounded-[2rem] sm:rounded-3xl p-6 bg-cream border-2 border-yellow/30 max-h-[85vh] overflow-y-auto">
           <DialogHeader className="pb-2">
             <DialogTitle className="font-display text-2xl text-purple flex items-center gap-2">
               🔍 Search Kawaii Items
@@ -371,7 +371,7 @@ export function MobileNav() {
 
       {/* --- Account Dialog --- */}
       <Dialog open={isAccountOpen} onOpenChange={setIsAccountOpen}>
-        <DialogContent className="sm:max-w-[400px] rounded-t-[2rem] sm:rounded-3xl p-6 bg-cream border-2 border-yellow/30 max-h-[85vh] overflow-y-auto">
+        <DialogContent className="w-[92vw] sm:max-w-[400px] rounded-[2rem] sm:rounded-3xl p-6 bg-cream border-2 border-yellow/30 max-h-[85vh] overflow-y-auto">
           <DialogHeader className="pb-2">
             <DialogTitle className="font-display text-2xl text-purple text-center">
               ✨ Kawaii Club Profile

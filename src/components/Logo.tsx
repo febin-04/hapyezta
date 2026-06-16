@@ -61,7 +61,7 @@ export function Logo({
   };
 
   const sloganSizes = {
-    sm: "text-[7px] tracking-[0.06em] sm:text-[8px] sm:tracking-[0.12em]",
+    sm: "text-[8px] tracking-[0.12em]",
     md: "text-[9px] tracking-[0.15em]",
     lg: "text-xs tracking-[0.18em]",
   };
