@@ -5,28 +5,37 @@ import { Instagram } from "lucide-react";
 
 interface AccordionItemProps {
   title: string;
+  to?: string;          // if set, the title navigates instead of toggling
   children: React.ReactNode;
 }
 
-function AccordionItem({ title, children }: AccordionItemProps) {
+function AccordionItem({ title, to, children }: AccordionItemProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="border-b border-[#E8DDF8]/20">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between py-4 text-left"
-      >
-        <span className="font-display text-lg font-bold text-orange">
-          {title}
-        </span>
-        <span
-          className="text-orange text-2xl leading-none transition-transform duration-300"
+      <div className="w-full flex items-center justify-between py-4">
+        {/* Title — link if 'to' is provided, plain text otherwise */}
+        {to ? (
+          <Link
+            to={to}
+            className="font-display text-lg font-bold text-orange hover:text-orange/80 transition"
+          >
+            {title}
+          </Link>
+        ) : (
+          <span className="font-display text-lg font-bold text-orange">{title}</span>
+        )}
+        {/* + toggle always available */}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="text-orange text-2xl leading-none transition-transform duration-300 pl-4"
           style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
+          aria-label={open ? "Collapse" : "Expand"}
         >
           +
-        </span>
-      </button>
+        </button>
+      </div>
       <div
         className="overflow-hidden transition-all duration-300"
         style={{ maxHeight: open ? "400px" : "0px" }}
@@ -75,7 +84,7 @@ export function Footer() {
           </div>
         </AccordionItem>
 
-        <AccordionItem title="Contact Us">
+        <AccordionItem title="Contact Us" to="/contact">
           <ul className="space-y-2">
             <li>
               <Link to="/contact" className="text-foreground/80 hover:text-orange transition">
