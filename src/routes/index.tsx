@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, ShoppingBag, Heart, Instagram, Star, Truck, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { MarqueeBanner } from "@/components/MarqueeBanner";
+import { Footer } from "@/components/Footer";
 import hero from "@/assets/hero.jpg";
 import heroSlide1 from "@/assets/hero_slide_1.png";
 import heroSlide2 from "@/assets/hero_slide_2.png";
@@ -342,46 +343,7 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#5B2D91] text-white pt-14 pb-8 px-4">
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div>
-            <div className="flex flex-col items-start">
-              <Logo size="md" withSlogan={true} className="items-start text-left" />
-            </div>
-            <p className="mt-3 text-sm text-[#E8DDF8]">Spreading kawaii joy, one cute package at a time. Pan-India delivery.</p>
-          </div>
-          <div>
-            <div className="font-display text-lg mb-3 text-white font-semibold">Shop</div>
-            <ul className="space-y-2 text-sm text-[#E8DDF8]">
-              <li><a href="#" className="hover:text-[#FFB84D] transition">Stationery</a></li>
-              <li><a href="#" className="hover:text-[#FFB84D] transition">Journals</a></li>
-              <li><a href="#" className="hover:text-[#FFB84D] transition">Gift sets</a></li>
-              <li><a href="#" className="hover:text-[#FFB84D] transition">Bottles</a></li>
-            </ul>
-          </div>
-          <div>
-            <div className="font-display text-lg mb-3 text-white font-semibold">Help</div>
-            <ul className="space-y-2 text-sm text-[#E8DDF8]">
-              <li><a href="#" className="hover:text-[#FFB84D] transition">Track order</a></li>
-              <li><a href="#" className="hover:text-[#FFB84D] transition">Shipping</a></li>
-              <li><a href="#" className="hover:text-[#FFB84D] transition">Returns</a></li>
-              <li><Link to="/contact" className="hover:text-[#FFB84D] transition">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <div className="font-display text-lg mb-3 text-white font-semibold">Stay in the loop</div>
-            <p className="text-sm text-[#E8DDF8] mb-3">Get cute drops in your inbox.</p>
-            <form className="flex gap-2">
-              <input type="email" placeholder="you@cute.com" className="flex-1 px-4 py-2 rounded-full bg-white/10 border border-[#E8DDF8]/20 placeholder:text-[#E8DDF8]/50 text-sm text-white outline-none focus:border-[#FFB84D]/50" />
-              <button className="px-4 py-2 rounded-full bg-[#FFB84D] hover:bg-white text-[#5B2D91] transition font-semibold text-sm">Join</button>
-            </form>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-[#E8DDF8]/20 text-center text-xs text-[#E8DDF8]/70">
-          © {new Date().getFullYear()} Hapyezta · Made with 💛 in India
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
