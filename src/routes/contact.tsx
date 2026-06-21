@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, ShoppingBag, Heart, Send, Phone, Mail } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { MarqueeBanner } from "@/components/MarqueeBanner";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -33,14 +34,7 @@ function Contact() {
   return (
     <div className="min-h-screen bg-background flex flex-col justify-between">
       <div>
-        {/* Top Banner strip – scrolling ticker */}
-        <div className="bg-purple text-white text-xs sm:text-sm py-2 font-medium overflow-hidden whitespace-nowrap">
-          <div className="banner-track">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <span key={i} className="px-12">✨&nbsp;&nbsp;Delivery All Over India&nbsp;&nbsp;✨</span>
-            ))}
-          </div>
-        </div>
+        <MarqueeBanner />
 
         {/* Header */}
         <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">

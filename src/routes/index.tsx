@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, ShoppingBag, Heart, Instagram, Star, Truck, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { MarqueeBanner } from "@/components/MarqueeBanner";
 import hero from "@/assets/hero.jpg";
 import heroSlide1 from "@/assets/hero_slide_1.png";
 import heroSlide2 from "@/assets/hero_slide_2.png";
@@ -74,14 +75,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background pb-16 lg:pb-0">
-      {/* Top Banner strip – scrolling ticker */}
-      <div className="bg-purple text-white text-xs sm:text-sm py-2 font-medium overflow-hidden whitespace-nowrap">
-        <div className="banner-track">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span key={i} className="px-12">✨&nbsp;&nbsp;Delivery All Over India&nbsp;&nbsp;✨</span>
-          ))}
-        </div>
-      </div>
+      <MarqueeBanner />
 
       <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
