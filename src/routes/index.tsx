@@ -111,8 +111,8 @@ function Index() {
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl leading-[1.1] sm:leading-[0.95] text-purple">
               <span className="block whitespace-nowrap">Where Happy</span>
               <span className="block whitespace-nowrap">
-                <span className="text-purple">Creation </span>
-                <span className="text-coral">Begin.</span>
+                <span className="text-orange">Creation </span>
+                <span className="text-orange">Begin.</span>
               </span>
             </h1>
             <p className="mt-5 text-lg text-foreground/70 max-w-md">
