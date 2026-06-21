@@ -36,7 +36,7 @@ function Checkout() {
   const [city, setCity] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [pincode, setPincode] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("cod"); // "cod" | "online"
+  const [paymentMethod, setPaymentMethod] = useState("online"); // "online"
 
   // Submission states
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -326,53 +326,17 @@ function Checkout() {
                     <h3 className="text-xs font-bold text-orange uppercase tracking-wider">
                       3. Payment Method
                     </h3>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <label
-                        className={`p-4 rounded-2xl border-2 flex items-center justify-between cursor-pointer transition ${
-                          paymentMethod === "cod"
-                            ? "border-coral bg-coral/5"
-                            : "border-purple/10 hover:border-purple/35 bg-white"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="radio"
-                            name="payment"
-                            value="cod"
-                            checked={paymentMethod === "cod"}
-                            onChange={() => setPaymentMethod("cod")}
-                            className="text-coral focus:ring-coral"
-                          />
-                          <div>
-                            <span className="block font-bold text-xs text-purple">Cash on Delivery</span>
-                            <span className="text-[10px] text-foreground/60">Pay cash upon delivery</span>
-                          </div>
+                    <div className="p-4 rounded-2xl border-2 border-coral bg-coral/5 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <CreditCard className="w-5 h-5 text-coral shrink-0" />
+                        <div>
+                          <span className="block font-bold text-xs text-purple">Pay Online (UPI, Card, NetBanking)</span>
+                          <span className="text-[10px] text-foreground/60">Fast, secure, and fully encrypted transaction</span>
                         </div>
-                        <Truck className="w-5 h-5 text-coral" />
-                      </label>
-                      <label
-                        className={`p-4 rounded-2xl border-2 flex items-center justify-between cursor-pointer transition ${
-                          paymentMethod === "online"
-                            ? "border-coral bg-coral/5"
-                            : "border-purple/10 hover:border-purple/35 bg-white"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="radio"
-                            name="payment"
-                            value="online"
-                            checked={paymentMethod === "online"}
-                            onChange={() => setPaymentMethod("online")}
-                            className="text-coral focus:ring-coral"
-                          />
-                          <div>
-                            <span className="block font-bold text-xs text-purple">Pay Online (UPI, Card)</span>
-                            <span className="text-[10px] text-foreground/60">Fast & 100% secure</span>
-                          </div>
-                        </div>
-                        <CreditCard className="w-5 h-5 text-teal" />
-                      </label>
+                      </div>
+                      <div className="text-xs text-teal font-bold bg-teal/10 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        Secure
+                      </div>
                     </div>
                   </div>
 
