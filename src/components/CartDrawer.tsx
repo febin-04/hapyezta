@@ -16,7 +16,7 @@ export function CartDrawer() {
   } = useCart();
 
   const FREE_SHIPPING_THRESHOLD = 999;
-  const SHIPPING_COST = 99;
+  const SHIPPING_COST = 100;
 
   const isFreeShipping = cartTotal >= FREE_SHIPPING_THRESHOLD;
   const amountNeededForFreeShipping = FREE_SHIPPING_THRESHOLD - cartTotal;

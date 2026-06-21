@@ -323,12 +323,7 @@ export function MobileNav() {
               >
                 📦 Track My Orders
               </button>
-              <button
-                onClick={() => alert("Opening loyalty points...")}
-                className="w-full text-left px-4 py-2.5 rounded-xl hover:bg-cream hover:text-coral transition font-semibold text-purple cursor-pointer border-none bg-transparent"
-              >
-                💖 Kawaii Rewards (180 pts)
-              </button>
+
               <button
                 onClick={() => alert("Opening profile settings...")}
                 className="w-full text-left px-4 py-2.5 rounded-xl hover:bg-cream hover:text-coral transition font-semibold text-purple cursor-pointer border-none bg-transparent"

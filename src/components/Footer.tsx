@@ -10,31 +10,52 @@ interface AccordionItemProps {
 
 function AccordionItem({ title, to, children }: AccordionItemProps) {
   const [open, setOpen] = useState(false);
+  const toggle = () => setOpen((o) => !o);
 
-  return (
-    <div className="border-b border-[#E8DDF8]/20">
-      <div className="w-full flex items-center justify-between py-4">
-        {/* Title — link if 'to' is provided, plain text otherwise */}
-        {to ? (
+  if (to) {
+    return (
+      <div className="border-b border-[#E8DDF8]/20">
+        <div className="w-full flex items-center justify-between py-4">
           <Link
             to={to}
             className="font-display text-lg font-bold text-orange hover:text-orange/80 transition"
           >
             {title}
           </Link>
-        ) : (
-          <span className="font-display text-lg font-bold text-orange">{title}</span>
-        )}
+          <button
+            onClick={toggle}
+            className="font-display font-bold text-orange text-2xl leading-none transition-transform duration-300 pl-4 cursor-pointer border-none bg-transparent outline-none focus:outline-none"
+            style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
+            aria-label={open ? "Collapse" : "Expand"}
+          >
+            +
+          </button>
+        </div>
+        <div
+          className="overflow-hidden transition-all duration-300"
+          style={{ maxHeight: open ? "400px" : "0px" }}
+        >
+          <div className="pb-4 text-sm text-[#E8DDF8] space-y-2">{children}</div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="border-b border-[#E8DDF8]/20">
+      <button
+        onClick={toggle}
+        className="w-full flex items-center justify-between py-4 text-left font-display text-lg font-bold text-orange hover:text-orange/80 transition cursor-pointer border-none bg-transparent outline-none focus:outline-none"
+      >
+        <span>{title}</span>
         {/* + toggle always available */}
-        <button
-          onClick={() => setOpen((o) => !o)}
-          className="text-orange text-2xl leading-none transition-transform duration-300 pl-4"
+        <span
+          className="text-orange text-2xl leading-none transition-transform duration-300 pl-4 select-none"
           style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
-          aria-label={open ? "Collapse" : "Expand"}
         >
           +
-        </button>
-      </div>
+        </span>
+      </button>
       <div
         className="overflow-hidden transition-all duration-300"
         style={{ maxHeight: open ? "400px" : "0px" }}

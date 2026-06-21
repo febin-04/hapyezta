@@ -4,6 +4,13 @@ import { useCart } from "@/context/CartContext";
 import { Logo } from "@/components/Logo";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, ShoppingBag, CheckCircle, CreditCard, Landmark, Truck } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -23,6 +30,37 @@ const INDIAN_STATES = [
   "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu",
   "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
 ];
+
+const getStateFromPincode = (pin: string): string => {
+  if (pin.length < 2) return "";
+  const prefix = parseInt(pin.slice(0, 2), 10);
+  
+  if (prefix === 11) return "Delhi";
+  if (prefix >= 12 && prefix <= 13) return "Haryana";
+  if (prefix >= 14 && prefix <= 15) return "Punjab";
+  if (prefix === 16) return "Punjab";
+  if (prefix === 17) return "Himachal Pradesh";
+  if (prefix >= 18 && prefix <= 19) return "Jammu and Kashmir";
+  if (prefix >= 20 && prefix <= 28) return "Uttar Pradesh";
+  if (prefix >= 30 && prefix <= 34) return "Rajasthan";
+  if (prefix >= 36 && prefix <= 39) return "Gujarat";
+  if (prefix >= 40 && prefix <= 44) return "Maharashtra";
+  if (prefix >= 45 && prefix <= 48) return "Madhya Pradesh";
+  if (prefix === 49) return "Chhattisgarh";
+  if (prefix >= 50 && prefix <= 53) {
+    if (prefix === 50) return "Telangana";
+    return "Andhra Pradesh";
+  }
+  if (prefix >= 56 && prefix <= 59) return "Karnataka";
+  if (prefix >= 60 && prefix <= 64) return "Tamil Nadu";
+  if (prefix >= 67 && prefix <= 69) return "Kerala";
+  if (prefix >= 70 && prefix <= 74) return "West Bengal";
+  if (prefix >= 75 && prefix <= 77) return "Odisha";
+  if (prefix === 78) return "Assam";
+  if (prefix >= 80 && prefix <= 85) return "Bihar";
+  
+  return "";
+};
 
 function Checkout() {
   const { cartItems, cartTotal, clearCart } = useCart();
@@ -44,9 +82,12 @@ function Checkout() {
   const [deliveryDateRange, setDeliveryDateRange] = useState("");
 
   const FREE_SHIPPING_THRESHOLD = 999;
-  const SHIPPING_COST = 99;
+  const isKeralaPincode = /^(67|68|69)/.test(pincode);
+  const isOtherPincode = pincode.length >= 2 && !isKeralaPincode;
+  const isKerala = isKeralaPincode || (selectedState === "Kerala" && !isOtherPincode);
+  const shippingCost = isKerala ? 60 : 100;
   const isFreeShipping = cartTotal >= FREE_SHIPPING_THRESHOLD;
-  const finalShippingCost = isFreeShipping ? 0 : SHIPPING_COST;
+  const finalShippingCost = isFreeShipping ? 0 : shippingCost;
   const grandTotal = cartTotal + finalShippingCost;
 
   // Generate order success details on submit
@@ -187,9 +228,7 @@ function Checkout() {
             <Link to="/">
               <Logo size="sm" withSlogan={false} className="items-center" />
             </Link>
-            <div className="text-xs font-semibold text-teal flex items-center gap-1.5 uppercase tracking-widest">
-              🔒 Secure Checkout
-            </div>
+            <div className="w-24" />
           </div>
         </header>
 
@@ -294,17 +333,25 @@ function Checkout() {
                       </div>
                       <div>
                         <label className="block text-purple/80 text-xs font-bold mb-1.5 pl-2">State</label>
-                        <select
-                          required
+                        <Select
                           value={selectedState}
-                          onChange={(e) => setSelectedState(e.target.value)}
-                          className="w-full px-4 py-3 rounded-full border-2 border-yellow/10 focus:border-orange bg-cream/10 text-xs outline-none transition text-foreground"
+                          onValueChange={setSelectedState}
                         >
-                          <option value="">Select State</option>
-                          {INDIAN_STATES.map((st) => (
-                            <option key={st} value={st}>{st}</option>
-                          ))}
-                        </select>
+                          <SelectTrigger className="w-full px-5 py-3 rounded-full border-2 border-yellow/10 focus:border-orange bg-cream/10 text-xs text-foreground outline-none transition shadow-none h-auto focus:ring-0 focus:ring-offset-0 [&>span]:line-clamp-1">
+                            <SelectValue placeholder="Select State" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white border-2 border-yellow/20 rounded-2xl max-h-[300px] overflow-y-auto z-50">
+                            {INDIAN_STATES.map((st) => (
+                              <SelectItem
+                                key={st}
+                                value={st}
+                                className="text-xs text-purple font-semibold focus:bg-cream focus:text-orange rounded-full cursor-pointer py-2.5 pl-4 pr-8 transition-colors"
+                              >
+                                {st}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div>
                         <label className="block text-purple/80 text-xs font-bold mb-1.5 pl-2">PIN Code</label>
@@ -314,7 +361,14 @@ function Checkout() {
                           maxLength={6}
                           placeholder="6 digits"
                           value={pincode}
-                          onChange={(e) => setPincode(e.target.value)}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, "").slice(0, 6);
+                            setPincode(val);
+                            const detectedState = getStateFromPincode(val);
+                            if (detectedState) {
+                              setSelectedState(detectedState);
+                            }
+                          }}
                           className="w-full px-5 py-3 rounded-full border-2 border-yellow/10 focus:border-orange bg-cream/10 text-xs outline-none transition placeholder:text-foreground/30 text-foreground"
                         />
                       </div>
@@ -331,7 +385,7 @@ function Checkout() {
                         <CreditCard className="w-5 h-5 text-coral shrink-0" />
                         <div>
                           <span className="block font-bold text-xs text-purple">Pay Online (UPI, Card, NetBanking)</span>
-                          <span className="text-[10px] text-foreground/60">Fast, secure, and fully encrypted transaction</span>
+                          <span className="block text-[10px] text-foreground/60 leading-tight">Fast, secure, and fully encrypted transaction</span>
                         </div>
                       </div>
                       <div className="text-xs text-teal font-bold bg-teal/10 px-2.5 py-1 rounded-full uppercase tracking-wider">
@@ -391,7 +445,7 @@ function Checkout() {
                     {isFreeShipping ? (
                       <span className="text-teal font-bold">FREE</span>
                     ) : (
-                      <span className="font-bold text-purple">₹{SHIPPING_COST}</span>
+                      <span className="font-bold text-purple">₹{shippingCost}</span>
                     )}
                   </div>
                   <div className="flex justify-between text-sm font-bold text-purple pt-2 border-t border-purple/5">
@@ -400,10 +454,7 @@ function Checkout() {
                   </div>
                 </div>
 
-                {/* Shipping alert */}
-                <div className="p-3 bg-teal/5 border border-dashed border-teal/30 rounded-2xl text-[10px] text-teal/80 text-center leading-relaxed">
-                  🚚 Free Shipping automatically activated on all orders over ₹999 across India.
-                </div>
+
               </div>
             </div>
           )}
