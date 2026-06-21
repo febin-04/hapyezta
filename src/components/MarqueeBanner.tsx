@@ -35,7 +35,7 @@ export function MarqueeBanner() {
         .hapyezta-marquee-track {
           display: inline-flex;
           width: max-content;
-          animation: hapyezta-marquee 18s linear infinite;
+          animation: hapyezta-marquee 35s linear infinite;
         }
         .hapyezta-marquee-track:hover {
           animation-play-state: paused;
