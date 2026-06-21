@@ -72,7 +72,7 @@ function Contact() {
           </div>
 
           <div className="text-center mb-10">
-            <h1 className="font-display text-5xl sm:text-6xl text-[#5B2D91] font-bold mb-3 tracking-normal">
+            <h1 className="font-display text-5xl sm:text-6xl text-orange font-bold mb-3 tracking-normal">
               Contact Us
             </h1>
             <p className="text-foreground/75 font-body text-base sm:text-lg">
@@ -84,7 +84,7 @@ function Contact() {
           <div className="w-full bg-white rounded-[2rem] p-6 sm:p-10 border-2 border-yellow/20 shadow-[0_12px_40px_rgba(127,88,165,0.06)] max-w-xl mx-auto">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-[#5B2D91] font-display font-bold text-xs tracking-widest mb-2 uppercase">
+                <label className="block text-orange font-display font-bold text-xs tracking-widest mb-2 uppercase">
                   Your Name
                 </label>
                 <input
@@ -92,12 +92,12 @@ function Contact() {
                   placeholder="Enter your name..."
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-6 py-4 rounded-full border-2 border-yellow/20 focus:border-[#5B2D91] bg-cream/10 text-sm outline-none transition font-body text-foreground placeholder:text-foreground/30"
+                  className="w-full px-6 py-4 rounded-full border-2 border-yellow/20 focus:border-orange bg-cream/10 text-sm outline-none transition font-body text-foreground placeholder:text-foreground/30"
                 />
               </div>
 
               <div>
-                <label className="block text-[#5B2D91] font-display font-bold text-xs tracking-widest mb-2 uppercase">
+                <label className="block text-orange font-display font-bold text-xs tracking-widest mb-2 uppercase">
                   Email Address
                 </label>
                 <input
@@ -105,12 +105,12 @@ function Contact() {
                   placeholder="Enter your email..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-6 py-4 rounded-full border-2 border-yellow/20 focus:border-[#5B2D91] bg-cream/10 text-sm outline-none transition font-body text-foreground placeholder:text-foreground/30"
+                  className="w-full px-6 py-4 rounded-full border-2 border-yellow/20 focus:border-orange bg-cream/10 text-sm outline-none transition font-body text-foreground placeholder:text-foreground/30"
                 />
               </div>
 
               <div>
-                <label className="block text-[#5B2D91] font-display font-bold text-xs tracking-widest mb-2 uppercase">
+                <label className="block text-orange font-display font-bold text-xs tracking-widest mb-2 uppercase">
                   Message
                 </label>
                 <textarea
@@ -118,13 +118,13 @@ function Contact() {
                   rows={5}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-6 py-4 rounded-[2rem] border-2 border-yellow/20 focus:border-[#5B2D91] bg-cream/10 text-sm outline-none transition font-body text-foreground resize-none placeholder:text-foreground/30"
+                  className="w-full px-6 py-4 rounded-[2rem] border-2 border-yellow/20 focus:border-orange bg-cream/10 text-sm outline-none transition font-body text-foreground resize-none placeholder:text-foreground/30"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-full bg-[#5B2D91] hover:bg-[#5B2D91]/95 text-white font-bold shadow-[0_5px_0_0_#421e6c] hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#421e6c] transition-all flex items-center justify-center gap-2.5 cursor-pointer text-sm font-display uppercase tracking-widest"
+                className="w-full py-4 rounded-full bg-orange hover:bg-orange/95 text-white font-bold shadow-[0_5px_0_0_#c4513f] hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#c4513f] transition-all flex items-center justify-center gap-2.5 cursor-pointer text-sm font-display uppercase tracking-widest"
               >
                 <Send className="w-4 h-4" /> Send Message
               </button>
@@ -139,14 +139,14 @@ function Contact() {
             <div className="space-y-5">
               {/* Phone item */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-cream border border-[#5B2D91]/20 flex items-center justify-center text-[#5B2D91] shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-full bg-cream border border-orange/20 flex items-center justify-center text-orange shrink-0 shadow-sm">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="text-left">
                   <span className="block font-display text-base text-purple font-bold">
                     Phone
                   </span>
-                  <a href="tel:+918921502990" className="text-sm text-foreground/75 hover:text-[#5B2D91] transition font-body">
+                  <a href="tel:+918921502990" className="text-sm text-foreground/75 hover:text-coral transition font-body">
                     +91 89215 02990
                   </a>
                 </div>
@@ -154,14 +154,14 @@ function Contact() {
 
               {/* Email item */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-cream border border-[#5B2D91]/20 flex items-center justify-center text-[#5B2D91] shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-full bg-cream border border-orange/20 flex items-center justify-center text-orange shrink-0 shadow-sm">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="text-left">
                   <span className="block font-display text-base text-purple font-bold">
                     Email
                   </span>
-                  <a href="mailto:hapyezta@gmail.com" className="text-sm text-foreground/75 hover:text-[#5B2D91] transition font-body">
+                  <a href="mailto:hapyezta@gmail.com" className="text-sm text-foreground/75 hover:text-coral transition font-body">
                     hapyezta@gmail.com
                   </a>
                 </div>
