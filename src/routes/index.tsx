@@ -75,7 +75,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background pb-16 lg:pb-0">
       <div className="bg-purple text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
-        ✨ Free shipping above ₹999 · Deliver all over India · COD available ✨
+        ✨ Free shipping above ₹999 · Delivery All Over India · COD available ✨
       </div>
 
       <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
