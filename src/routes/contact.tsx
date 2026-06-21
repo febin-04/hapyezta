@@ -35,7 +35,7 @@ function Contact() {
       <div>
         {/* Top Banner strip */}
         <div className="bg-purple text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
-          ✨ Free shipping above ₹999 · Delivery All Over India · COD available ✨
+          ✨  Delivery All Over India  ✨
         </div>
 
         {/* Header */}
