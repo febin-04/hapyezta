@@ -7,6 +7,7 @@ interface LogoProps {
   withSlogan?: boolean;
   size?: "sm" | "md" | "lg";
   collapseOnScroll?: boolean;
+  isScrolled?: boolean;
 }
 
 export function LogoIcon({ className = "w-10 h-10" }: { className?: string }) {
@@ -49,17 +50,20 @@ export function Logo({
   withSlogan = true,
   size = "md",
   collapseOnScroll = false,
+  isScrolled: controlledIsScrolled,
 }: LogoProps) {
-  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [internalIsScrolled, setInternalIsScrolled] = React.useState(false);
 
   React.useEffect(() => {
-    if (!collapseOnScroll) return;
+    if (!collapseOnScroll || controlledIsScrolled !== undefined) return;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setInternalIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [collapseOnScroll]);
+  }, [collapseOnScroll, controlledIsScrolled]);
+
+  const isScrolled = controlledIsScrolled !== undefined ? controlledIsScrolled : internalIsScrolled;
 
   const iconSizes = {
     sm: "w-8 h-8",

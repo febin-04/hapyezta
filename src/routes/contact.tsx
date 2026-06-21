@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, ShoppingBag, Heart, Send, Phone, Mail } from "lucide-react";
 import { Logo } from "@/components/Logo";
@@ -19,6 +19,15 @@ function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,8 +49,15 @@ function Contact() {
         {/* Header */}
         <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <Link to="/" className="hover:opacity-90 transition py-1 mx-auto lg:mx-0">
-              <Logo size="sm" withSlogan={true} collapseOnScroll={true} className="items-center lg:items-start" />
+            <Link
+              to="/"
+              className={`hover:opacity-90 transition py-1 ${
+                isScrolled
+                  ? "relative left-0 translate-x-0 lg:left-0 lg:translate-x-0"
+                  : "relative left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0"
+              } transition-all duration-300`}
+            >
+              <Logo size="sm" withSlogan={true} collapseOnScroll={true} isScrolled={isScrolled} className="items-center lg:items-start" />
             </Link>
             <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-foreground/80">
               <Link to="/" hash="collection" className="hover:text-coral transition">Shop</Link>
