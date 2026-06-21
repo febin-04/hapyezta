@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter, useNavigate } from "@tanstack/react-router";
 import {
   Heart,
   ShoppingCart,
@@ -31,6 +31,7 @@ function ProductDetails() {
   const { productId } = Route.useParams();
   const product = getProductById(productId);
   const router = useRouter();
+  const navigate = useNavigate();
 
   // Scroll to top on load
   useEffect(() => {
@@ -308,7 +309,7 @@ function ProductDetails() {
                         color: selectedColor || undefined,
                         quantity: quantity,
                       });
-                      alert("Redirecting to checkout! 💳");
+                      navigate({ to: "/checkout" });
                     }}
                     className="w-full py-4 rounded-full bg-coral hover:bg-coral/95 text-white font-bold text-sm shadow-[0_4px_0_0_#c4513f] hover:translate-y-0.5 hover:shadow-[0_1px_0_0_#c4513f] transition-all duration-300 cursor-pointer"
                   >

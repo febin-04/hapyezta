@@ -2,8 +2,10 @@ import React from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useCart } from "@/context/CartContext";
 import { Minus, Plus, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 
 export function CartDrawer() {
+  const navigate = useNavigate();
   const {
     cartItems,
     cartTotal,
@@ -170,8 +172,8 @@ export function CartDrawer() {
 
               <button
                 onClick={() => {
-                  alert("Proceeding to checkout! Thank you 💛");
                   closeCart();
+                  navigate({ to: "/checkout" });
                 }}
                 className="w-full py-3.5 rounded-full bg-coral hover:bg-coral/95 text-white font-bold shadow-[0_4px_0_0_#c4513f] hover:translate-y-0.5 hover:shadow-[0_1px_0_0_#c4513f] transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
               >
