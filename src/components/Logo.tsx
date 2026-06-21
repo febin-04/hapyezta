@@ -90,13 +90,19 @@ export function Logo({
   const isCollapsed = collapseOnScroll && isScrolled;
 
   return (
-    <div className={`inline-flex flex-col items-center justify-center transition-all duration-300 ${className}`}>
-      {/* Logo Icon on Top */}
+    <div
+      className={`inline-flex transition-all duration-300 ${
+        isCollapsed
+          ? "flex-row items-center justify-start gap-2 lg:flex-col lg:items-center lg:justify-center lg:gap-0"
+          : "flex-col items-center justify-center"
+      } ${className}`}
+    >
+      {/* Logo Icon on Top (Left when collapsed on mobile) */}
       <div
-        className={`transition-all duration-300 ease-in-out origin-top ${
+        className={`transition-all duration-300 ease-in-out ${
           isCollapsed
-            ? "max-h-0 opacity-0 scale-0 mb-0 pointer-events-none lg:max-h-16 lg:opacity-100 lg:scale-100 lg:mb-1.5 lg:pointer-events-auto overflow-hidden"
-            : "max-h-16 opacity-100 scale-100 mb-1.5"
+            ? "opacity-100 scale-90 mb-0 lg:scale-100 lg:mb-1.5"
+            : "opacity-100 scale-100 mb-1.5"
         }`}
       >
         <LogoIcon className={`${iconSizes[size]} transition-transform hover:scale-105 duration-300`} />
