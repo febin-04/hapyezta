@@ -445,7 +445,7 @@ function ProductDetails() {
               <li><a href="#" className="hover:text-[#FFB84D] transition">Track order</a></li>
               <li><a href="#" className="hover:text-[#FFB84D] transition">Shipping</a></li>
               <li><a href="#" className="hover:text-[#FFB84D] transition">Returns</a></li>
-              <li><a href="https://wa.me/918921502990" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFB84D] transition">Contact</a></li>
+              <li><Link to="/contact" className="hover:text-[#FFB84D] transition">Contact</Link></li>
             </ul>
           </div>
           <div>
