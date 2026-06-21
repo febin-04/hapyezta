@@ -108,9 +108,12 @@ function Index() {
             <div className="inline-flex items-center gap-2 bg-yellow/30 text-purple px-4 py-1.5 rounded-full text-sm font-semibold mb-5">
               <Sparkles className="w-4 h-4" /> Back to School Drop
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl leading-[1.1] sm:leading-[0.95] text-purple">
-              <span className="block whitespace-nowrap">Where Happy Creation</span>
-              <span className="text-coral block">Begin.</span>
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl leading-[1.1] sm:leading-[0.95] text-purple">
+              <span className="block whitespace-nowrap">Where Happy</span>
+              <span className="block whitespace-nowrap">
+                <span className="text-purple">Creation </span>
+                <span className="text-coral">Begin.</span>
+              </span>
             </h1>
             <p className="mt-5 text-lg text-foreground/70 max-w-md">
               Kawaii stationery, dreamy journals & gift sets handpicked to make every desk a little happier.
