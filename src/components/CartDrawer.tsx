@@ -15,14 +15,8 @@ export function CartDrawer() {
     removeFromCart,
   } = useCart();
 
-  const FREE_SHIPPING_THRESHOLD = 999;
   const SHIPPING_COST = 100;
-
-  const isFreeShipping = cartTotal >= FREE_SHIPPING_THRESHOLD;
-  const amountNeededForFreeShipping = FREE_SHIPPING_THRESHOLD - cartTotal;
-  const progressPercent = Math.min((cartTotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
-
-  const finalShippingCost = isFreeShipping ? 0 : SHIPPING_COST;
+  const finalShippingCost = SHIPPING_COST;
   const grandTotal = cartTotal + finalShippingCost;
 
   return (
@@ -61,31 +55,7 @@ export function CartDrawer() {
           <>
             {/* Scrollable Items List */}
             <div className="flex-1 overflow-y-auto py-4 space-y-4 pr-1">
-              {/* Shipping Progress bar */}
-              <div className="bg-white p-4 rounded-2xl border border-purple/10 shadow-sm space-y-2.5">
-                {isFreeShipping ? (
-                  <div className="text-center">
-                    <span className="text-xs font-bold text-teal flex items-center justify-center gap-1.5">
-                      🎉 Free Shipping Unlocked!
-                    </span>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">
-                      Your order will be shipped for free across India!
-                    </p>
-                  </div>
-                ) : (
-                  <div className="space-y-1.5">
-                    <div className="text-xs text-foreground/80 font-medium text-center">
-                      You are only <span className="font-bold text-coral">₹{amountNeededForFreeShipping}</span> away from <span className="font-bold text-teal">Free Shipping</span>!
-                    </div>
-                    <div className="w-full h-2 bg-purple/10 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-coral to-teal transition-all duration-500 ease-out"
-                        style={{ width: `${progressPercent}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
+
 
               {/* Items */}
               <div className="space-y-3.5">
@@ -158,11 +128,7 @@ export function CartDrawer() {
                 </div>
                 <div className="flex justify-between text-xs text-muted-foreground">
                   <span>Shipping</span>
-                  {isFreeShipping ? (
-                    <span className="text-teal font-semibold">FREE</span>
-                  ) : (
-                    <span>₹{SHIPPING_COST}</span>
-                  )}
+                  <span>₹{SHIPPING_COST}</span>
                 </div>
                 <div className="flex justify-between text-sm font-bold text-purple pt-1.5 border-t border-purple/5">
                   <span>Total</span>

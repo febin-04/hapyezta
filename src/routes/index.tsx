@@ -134,7 +134,7 @@ function Index() {
               <Star className="w-3 h-3 fill-coral" /> So cute!
             </div>
             <div className="absolute bottom-6 -right-2 bg-white rounded-2xl shadow-xl px-3 py-2 rotate-[6deg] text-xs font-bold text-teal flex items-center gap-1.5 z-20">
-              <Truck className="w-3 h-3" /> Free shipping
+              <Truck className="w-3 h-3" /> Fast shipping
             </div>
           </div>
         </div>
@@ -244,7 +244,7 @@ function Index() {
       <section className="py-12 px-4">
         <div className="max-w-7xl mx-auto grid sm:grid-cols-3 gap-4">
           {[
-            { c: "var(--teal)", t: "Free Shipping", s: "On orders ₹999+", icon: <Truck className="w-6 h-6" /> },
+            { c: "var(--teal)", t: "Fast Shipping", s: "Ships within 24-48 hours", icon: <Truck className="w-6 h-6" /> },
             { c: "var(--orange)", t: "Delivery All Over India", s: "Available across India", icon: <ShoppingBag className="w-6 h-6" /> },
             { c: "var(--coral)", t: "Loved by 10k+", s: "5-star kawaii fans", icon: <Heart className="w-6 h-6" /> },
           ].map((b) => (

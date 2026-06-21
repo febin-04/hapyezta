@@ -76,12 +76,10 @@ function Checkout() {
   const [orderId, setOrderId] = useState("");
   const [deliveryDateRange, setDeliveryDateRange] = useState("");
 
-  const FREE_SHIPPING_THRESHOLD = 999;
   const isKeralaPincode = /^(67|68|69)/.test(pincode);
   const isKerala = selectedState === "Kerala" || isKeralaPincode;
   const shippingCost = isKerala ? 60 : 100;
-  const isFreeShipping = cartTotal >= FREE_SHIPPING_THRESHOLD;
-  const finalShippingCost = isFreeShipping ? 0 : shippingCost;
+  const finalShippingCost = shippingCost;
   const grandTotal = cartTotal + finalShippingCost;
 
   // Generate order success details on submit
@@ -448,16 +446,9 @@ function Checkout() {
                     <span>Subtotal</span>
                     <span className="font-bold text-purple">₹{cartTotal}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between">
                     <span>Shipping</span>
-                    {isFreeShipping ? (
-                      <div className="text-right">
-                        <span className="text-teal font-bold">FREE</span>
-                        <span className="text-[10px] text-muted-foreground line-through block -mt-0.5">₹{shippingCost}</span>
-                      </div>
-                    ) : (
-                      <span className="font-bold text-purple">₹{shippingCost}</span>
-                    )}
+                    <span className="font-bold text-purple">₹{shippingCost}</span>
                   </div>
                   <div className="flex justify-between text-sm font-bold text-purple pt-2 border-t border-purple/5">
                     <span>Grand Total</span>
