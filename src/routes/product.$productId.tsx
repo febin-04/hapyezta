@@ -20,12 +20,14 @@ import { getProductById, products } from "@/lib/products";
 import { Logo } from "@/components/Logo";
 import { MarqueeBanner } from "@/components/MarqueeBanner";
 import { Footer } from "@/components/Footer";
+import { useCart } from "@/context/CartContext";
 
 export const Route = createFileRoute("/product/$productId")({
   component: ProductDetails,
 });
 
 function ProductDetails() {
+  const { cartCount, openCart, addToCart } = useCart();
   const { productId } = Route.useParams();
   const product = getProductById(productId);
   const router = useRouter();
@@ -85,7 +87,16 @@ function ProductDetails() {
   };
 
   const handleAddToCart = () => {
-    alert(`Added ${quantity} x ${product.name} (${selectedColor}) to your cart! 🛍️`);
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: parseFloat(product.price.replace(/[^\d.]/g, "")),
+      priceString: product.price,
+      img: product.img,
+      color: selectedColor || undefined,
+      quantity: quantity,
+    });
+    openCart();
   };
 
   const handleNotifyMe = () => {
@@ -112,9 +123,13 @@ function ProductDetails() {
           <div className="flex items-center gap-2 sm:gap-3">
             <button className="p-2 hover:text-coral hidden lg:block"><Search className="w-5 h-5" /></button>
             <button className="p-2 hover:text-coral hidden sm:block"><Heart className="w-5 h-5" /></button>
-            <button className="p-2 hover:text-coral relative hidden lg:block">
+            <button onClick={openCart} className="p-2 hover:text-coral relative hidden lg:block cursor-pointer">
               <ShoppingBag className="w-5 h-5" />
-              <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center">3</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center animate-fade-in">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -283,7 +298,18 @@ function ProductDetails() {
                     <ShoppingCart className="w-4 h-4" /> Add to cart
                   </button>
                   <button
-                    onClick={() => alert("Redirecting to checkout! 💳")}
+                    onClick={() => {
+                      addToCart({
+                        id: product.id,
+                        name: product.name,
+                        price: parseFloat(product.price.replace(/[^\d.]/g, "")),
+                        priceString: product.price,
+                        img: product.img,
+                        color: selectedColor || undefined,
+                        quantity: quantity,
+                      });
+                      alert("Redirecting to checkout! 💳");
+                    }}
                     className="w-full py-4 rounded-full bg-coral hover:bg-coral/95 text-white font-bold text-sm shadow-[0_4px_0_0_#c4513f] hover:translate-y-0.5 hover:shadow-[0_1px_0_0_#c4513f] transition-all duration-300 cursor-pointer"
                   >
                     Buy it now

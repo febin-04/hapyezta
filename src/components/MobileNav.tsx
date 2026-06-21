@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Home, Search, LayoutGrid, ShoppingCart, User, X, ShoppingBag, ArrowRight } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
+import { useCart } from "@/context/CartContext";
+import { products } from "@/lib/products";
 import {
   Dialog,
   DialogContent,
@@ -27,9 +29,9 @@ const searchPool = [
 ];
 
 export function MobileNav() {
+  const { cartCount, openCart, isCartOpen } = useCart();
   const [activeTab, setActiveTab] = useState("home");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -54,7 +56,7 @@ export function MobileNav() {
     } else if (tab === "search") {
       setIsSearchOpen(true);
     } else if (tab === "cart") {
-      setIsCartOpen(true);
+      openCart();
     } else if (tab === "account") {
       setIsAccountOpen(true);
     }
@@ -123,9 +125,11 @@ export function MobileNav() {
           >
             <div className="relative">
               <ShoppingCart className="w-[22px] h-[22px] stroke-[2.2]" />
-              <span className="absolute -top-1.5 -right-2.5 bg-coral text-white text-[9px] font-bold w-4 h-4 rounded-full grid place-items-center border border-white">
-                3
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-2.5 bg-coral text-white text-[9px] font-bold w-4 h-4 rounded-full grid place-items-center border border-white animate-fade-in">
+                  {cartCount}
+                </span>
+              )}
             </div>
             <span className="text-[11px] font-semibold mt-0.5 font-body">cart</span>
             {(activeTab === "cart" || isCartOpen) && (
@@ -234,8 +238,16 @@ export function MobileNav() {
                         </div>
                         <button
                           onClick={() => {
-                            alert(`${p.name} added to cart!`);
+                            const matched = products.find((prod) => prod.name === p.name);
+                            addToCart({
+                              id: matched?.id || p.name.toLowerCase().replace(/\s+/g, "-"),
+                              name: p.name,
+                              price: parseFloat(p.price.replace(/[^\d.]/g, "")),
+                              priceString: p.price,
+                              img: matched?.img || "",
+                            });
                             setIsSearchOpen(false);
+                            openCart();
                           }}
                           className="px-3 py-1.5 rounded-full bg-purple text-white text-xs font-semibold hover:bg-coral transition cursor-pointer shrink-0"
                         >
@@ -263,114 +275,7 @@ export function MobileNav() {
         </DialogContent>
       </Dialog>
 
-      {/* --- Cart Sheet --- */}
-      <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-        <SheetContent side="right" className="w-[85vw] sm:max-w-md p-6 bg-cream border-l-2 border-yellow/30 flex flex-col h-full">
-          <SheetHeader className="pb-4 border-b border-purple/10">
-            <SheetTitle className="font-display text-2xl text-purple flex items-center gap-2">
-              🛍️ Your Kawaii Cart
-            </SheetTitle>
-          </SheetHeader>
-
-          {/* Cart items list */}
-          <div className="flex-1 overflow-y-auto py-4 space-y-3.5">
-            {/* Item 1 */}
-            <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-purple/10 shadow-sm">
-              <div className="w-16 h-16 rounded-xl bg-purple/5 border border-purple/10 shrink-0 grid place-items-center text-2xl select-none">
-                🍰
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="font-semibold text-sm text-foreground truncate">
-                  Kawaii Mini Clay Cupcakes
-                </h4>
-                <p className="text-xs text-muted-foreground mt-0.5">Qty: 1</p>
-                <div className="flex items-center justify-between mt-1.5">
-                  <span className="text-sm font-bold text-purple">₹499</span>
-                  <button className="text-xs text-red-500 hover:text-red-600 font-semibold cursor-pointer">
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-purple/10 shadow-sm">
-              <div className="w-16 h-16 rounded-xl bg-yellow/5 border border-yellow/10 shrink-0 grid place-items-center text-2xl select-none">
-                🦆
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="font-semibold text-sm text-foreground truncate">
-                  Kawaii Duck Organizer
-                </h4>
-                <p className="text-xs text-muted-foreground mt-0.5">Qty: 1</p>
-                <div className="flex items-center justify-between mt-1.5">
-                  <span className="text-sm font-bold text-purple">₹799</span>
-                  <button className="text-xs text-red-500 hover:text-red-600 font-semibold cursor-pointer">
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-purple/10 shadow-sm">
-              <div className="w-16 h-16 rounded-xl bg-coral/5 border border-coral/10 shrink-0 grid place-items-center text-2xl select-none">
-                📔
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="font-semibold text-sm text-foreground truncate">
-                  Lavender Journal Kit
-                </h4>
-                <p className="text-xs text-muted-foreground mt-0.5">Qty: 1</p>
-                <div className="flex items-center justify-between mt-1.5">
-                  <span className="text-sm font-bold text-purple">₹599</span>
-                  <button className="text-xs text-red-500 hover:text-red-600 font-semibold cursor-pointer">
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Free shipping banner */}
-            <div className="bg-white/60 rounded-2xl p-3.5 border border-dashed border-teal/40 mt-4 text-center">
-              <span className="text-xs font-semibold text-teal flex items-center justify-center gap-1">
-                🎉 Free Shipping Activated!
-              </span>
-              <p className="text-[10px] text-muted-foreground mt-0.5">
-                Your order is above ₹999. Yay!
-              </p>
-            </div>
-          </div>
-
-          {/* Cart footer */}
-          <div className="pt-4 border-t border-purple/10 space-y-4">
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-sm text-muted-foreground">
-                <span>Subtotal</span>
-                <span>₹1,897</span>
-              </div>
-              <div className="flex justify-between text-sm text-muted-foreground">
-                <span>Shipping</span>
-                <span className="text-teal font-semibold">FREE</span>
-              </div>
-              <div className="flex justify-between text-base font-bold text-purple pt-1.5 border-t border-purple/5">
-                <span>Total</span>
-                <span>₹1,897</span>
-              </div>
-            </div>
-
-            <button
-              onClick={() => {
-                alert("Proceeding to checkout! Thank you 💛");
-                setIsCartOpen(false);
-              }}
-              className="w-full py-3.5 rounded-full bg-coral hover:bg-coral/95 text-white font-bold shadow-[0_4px_0_0_#c4513f] hover:translate-y-0.5 hover:shadow-[0_1px_0_0_#c4513f] transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
-            >
-              Checkout Now <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </SheetContent>
-      </Sheet>
+      {/* Global Cart Drawer is mounted in __root.tsx, no separate Sheet is needed here */}
 
       {/* --- Account Dialog --- */}
       <Dialog open={isAccountOpen} onOpenChange={setIsAccountOpen}>

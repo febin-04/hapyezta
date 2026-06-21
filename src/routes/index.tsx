@@ -4,6 +4,7 @@ import { Search, ShoppingBag, Heart, Instagram, Star, Truck, Sparkles } from "lu
 import { Logo } from "@/components/Logo";
 import { MarqueeBanner } from "@/components/MarqueeBanner";
 import { Footer } from "@/components/Footer";
+import { useCart } from "@/context/CartContext";
 import hero from "@/assets/hero.jpg";
 import heroSlide1 from "@/assets/hero_slide_1.png";
 import heroSlide2 from "@/assets/hero_slide_2.png";
@@ -64,6 +65,7 @@ const testimonials = [
 ];
 
 function Index() {
+  const { cartCount, openCart, addToCart } = useCart();
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const heroImages = [hero, heroSlide1, heroSlide2, heroSlide3];
 
@@ -93,9 +95,13 @@ function Index() {
           <div className="flex items-center gap-2 sm:gap-3">
             <button className="p-2 hover:text-coral hidden lg:block"><Search className="w-5 h-5" /></button>
             <button className="p-2 hover:text-coral hidden sm:block"><Heart className="w-5 h-5" /></button>
-            <button className="p-2 hover:text-coral relative hidden lg:block">
+            <button onClick={openCart} className="p-2 hover:text-coral relative hidden lg:block cursor-pointer">
               <ShoppingBag className="w-5 h-5" />
-              <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center">3</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center animate-fade-in">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -232,7 +238,19 @@ function Index() {
                       {p.oldPrice && <span className="text-xs text-foreground/40 line-through">{p.oldPrice}</span>}
                     </div>
                   </div>
-                  <button onClick={() => alert(`${p.name} added to cart! 🛍️`)} className="mt-3 w-full py-2 rounded-full bg-purple text-white text-sm font-semibold hover:bg-coral transition cursor-pointer">
+                  <button
+                    onClick={() => {
+                      addToCart({
+                        id: p.id,
+                        name: p.name,
+                        price: parseFloat(p.price.replace(/[^\d.]/g, "")),
+                        priceString: p.price,
+                        img: p.img,
+                      });
+                      openCart();
+                    }}
+                    className="mt-3 w-full py-2 rounded-full bg-purple text-white text-sm font-semibold hover:bg-coral transition cursor-pointer"
+                  >
                     Add to cart
                   </button>
                 </div>
