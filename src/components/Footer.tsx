@@ -65,14 +65,6 @@ function SocialIcons({ hoverBgClass }: { hoverBgClass: string }) {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <defs>
-            <linearGradient id="ig-footer-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#f9ce34" />
-              <stop offset="30%" stopColor="#ee2a7b" />
-              <stop offset="60%" stopColor="#d82b7a" />
-              <stop offset="100%" stopColor="#6228d7" />
-            </linearGradient>
-          </defs>
           <rect x="5" y="5" width="22" height="22" rx="6" />
           <circle cx="16" cy="16" r="5" />
           <circle cx="22" cy="10" r="1.2" />
@@ -112,6 +104,17 @@ export function Footer() {
 
   return (
     <footer className="bg-cream text-foreground pt-10 pb-6 px-4">
+      {/* Global SVG Gradients definitions */}
+      <svg style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+        <defs>
+          <linearGradient id="ig-footer-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#f9ce34" />
+            <stop offset="30%" stopColor="#ee2a7b" />
+            <stop offset="60%" stopColor="#d82b7a" />
+            <stop offset="100%" stopColor="#6228d7" />
+          </linearGradient>
+        </defs>
+      </svg>
       {/* ── Mobile accordion (hidden on lg+) ── */}
       <div className="lg:hidden max-w-xl mx-auto">
         <AccordionItem title="About Us">
