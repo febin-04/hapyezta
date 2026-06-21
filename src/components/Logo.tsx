@@ -6,6 +6,7 @@ interface LogoProps {
   iconOnly?: boolean;
   withSlogan?: boolean;
   size?: "sm" | "md" | "lg";
+  collapseOnScroll?: boolean;
 }
 
 export function LogoIcon({ className = "w-10 h-10" }: { className?: string }) {
@@ -47,7 +48,19 @@ export function Logo({
   iconOnly = false,
   withSlogan = true,
   size = "md",
+  collapseOnScroll = false,
 }: LogoProps) {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!collapseOnScroll) return;
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [collapseOnScroll]);
+
   const iconSizes = {
     sm: "w-8 h-8",
     md: "w-10 h-10",
@@ -70,22 +83,40 @@ export function Logo({
     return <LogoIcon className={iconSizes[size]} />;
   }
 
+  const isCollapsed = collapseOnScroll && isScrolled;
+
   return (
-    <div className={`inline-flex flex-col items-center justify-center ${className}`}>
+    <div className={`inline-flex flex-col items-center justify-center transition-all duration-300 ${className}`}>
       {/* Logo Icon on Top */}
-      <LogoIcon className={`${iconSizes[size]} mb-1.5 transition-transform hover:scale-105 duration-300`} />
+      <div
+        className={`transition-all duration-300 ease-in-out origin-top ${
+          isCollapsed
+            ? "max-h-0 opacity-0 scale-0 mb-0 pointer-events-none lg:max-h-16 lg:opacity-100 lg:scale-100 lg:mb-1.5 lg:pointer-events-auto overflow-hidden"
+            : "max-h-16 opacity-100 scale-100 mb-1.5"
+        }`}
+      >
+        <LogoIcon className={`${iconSizes[size]} transition-transform hover:scale-105 duration-300`} />
+      </div>
       
       {/* Brand Text */}
       <LogoText className={`${textSizes[size]} font-bold tracking-tight leading-none`} />
 
       {/* Slogan */}
       {withSlogan && (
-        <span
-          className={`mt-1.5 uppercase font-bold text-orange leading-none select-none text-center ${sloganSizes[size]}`}
-          style={{ fontFamily: "var(--font-display)" }}
+        <div
+          className={`transition-all duration-300 ease-in-out origin-bottom ${
+            isCollapsed
+              ? "max-h-0 opacity-0 scale-0 mt-0 pointer-events-none lg:max-h-8 lg:opacity-100 lg:scale-100 lg:mt-1.5 lg:pointer-events-auto overflow-hidden"
+              : "max-h-8 opacity-100 scale-100 mt-1.5"
+          }`}
         >
-          Where Happy Creation Begin
-        </span>
+          <span
+            className={`block uppercase font-bold text-orange leading-none select-none text-center ${sloganSizes[size]}`}
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Where Happy Creation Begin
+          </span>
+        </div>
       )}
     </div>
   );
