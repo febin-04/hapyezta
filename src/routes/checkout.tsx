@@ -4,13 +4,7 @@ import { useCart } from "@/context/CartContext";
 import { Logo } from "@/components/Logo";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, ShoppingBag, CheckCircle, CreditCard, Landmark, Truck } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -75,6 +69,7 @@ function Checkout() {
   const [selectedState, setSelectedState] = useState("");
   const [pincode, setPincode] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("online"); // "online"
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Submission states
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -331,27 +326,41 @@ function Checkout() {
                           className="w-full px-5 py-3 rounded-full border-2 border-yellow/10 focus:border-orange bg-cream/10 text-xs outline-none transition placeholder:text-foreground/30 text-foreground"
                         />
                       </div>
-                      <div>
+                      <div className="relative">
                         <label className="block text-purple/80 text-xs font-bold mb-1.5 pl-2">State</label>
-                        <Select
-                          value={selectedState}
-                          onValueChange={setSelectedState}
+                        <button
+                          type="button"
+                          onClick={() => setIsDropdownOpen((o) => !o)}
+                          className="w-full flex items-center justify-between px-5 py-3 rounded-full border-2 border-yellow/10 focus:border-orange bg-cream/10 text-xs text-foreground outline-none transition text-left cursor-pointer animate-none"
                         >
-                          <SelectTrigger className="w-full px-5 py-3 rounded-full border-2 border-yellow/10 focus:border-orange bg-cream/10 text-xs text-foreground outline-none transition shadow-none h-auto focus:ring-0 focus:ring-offset-0 [&>span]:line-clamp-1">
-                            <SelectValue placeholder="Select State" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white border-2 border-yellow/20 rounded-2xl max-h-[300px] overflow-y-auto z-50">
-                            {INDIAN_STATES.map((st) => (
-                              <SelectItem
-                                key={st}
-                                value={st}
-                                className="text-xs text-purple font-semibold focus:bg-cream focus:text-orange rounded-full cursor-pointer py-2.5 pl-4 pr-8 transition-colors"
-                              >
-                                {st}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                          <span>{selectedState || "Select State"}</span>
+                          <span className="text-purple/50 text-[10px] select-none">▼</span>
+                        </button>
+                        
+                        {isDropdownOpen && (
+                          <>
+                            {/* Backdrop to close dropdown on click outside */}
+                            <div 
+                              className="fixed inset-0 z-40" 
+                              onClick={() => setIsDropdownOpen(false)}
+                            />
+                            <div className="absolute left-0 right-0 mt-1.5 z-50 max-h-[250px] overflow-y-auto bg-white border-2 border-yellow/20 rounded-2xl shadow-xl p-1.5 space-y-0.5">
+                              {INDIAN_STATES.map((st) => (
+                                <button
+                                  key={st}
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedState(st);
+                                    setIsDropdownOpen(false);
+                                  }}
+                                  className="w-full text-left px-4 py-2.5 rounded-xl hover:bg-cream text-xs text-purple font-semibold hover:text-orange transition-colors cursor-pointer border-none bg-transparent"
+                                >
+                                  {st}
+                                </button>
+                              ))}
+                            </div>
+                          </>
+                        )}
                       </div>
                       <div>
                         <label className="block text-purple/80 text-xs font-bold mb-1.5 pl-2">PIN Code</label>
