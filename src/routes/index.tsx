@@ -110,7 +110,7 @@ function Index() {
             </div>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-purple">
               Where Happy Creation<br />
-              <span className="text-coral">Should Begin.</span>
+              <span className="text-coral">Begin.</span>
             </h1>
             <p className="mt-5 text-lg text-foreground/70 max-w-md">
               Kawaii stationery, dreamy journals & gift sets handpicked to make every desk a little happier.
