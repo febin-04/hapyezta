@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Home, Search, LayoutGrid, ShoppingCart, User, X, ShoppingBag, ArrowRight } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 import {
   Dialog,
   DialogContent,
@@ -30,6 +31,7 @@ export function MobileNav() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Search logic
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,6 +44,7 @@ export function MobileNav() {
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
     if (tab === "home") {
+      navigate({ to: "/" });
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (tab === "shop") {
       const el = document.getElementById("collection");
