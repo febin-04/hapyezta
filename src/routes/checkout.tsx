@@ -78,8 +78,7 @@ function Checkout() {
 
   const FREE_SHIPPING_THRESHOLD = 999;
   const isKeralaPincode = /^(67|68|69)/.test(pincode);
-  const isOtherPincode = pincode.length >= 2 && !isKeralaPincode;
-  const isKerala = isKeralaPincode || (selectedState === "Kerala" && !isOtherPincode);
+  const isKerala = selectedState === "Kerala" || isKeralaPincode;
   const shippingCost = isKerala ? 60 : 100;
   const isFreeShipping = cartTotal >= FREE_SHIPPING_THRESHOLD;
   const finalShippingCost = isFreeShipping ? 0 : shippingCost;
@@ -449,10 +448,13 @@ function Checkout() {
                     <span>Subtotal</span>
                     <span className="font-bold text-purple">₹{cartTotal}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <span>Shipping</span>
                     {isFreeShipping ? (
-                      <span className="text-teal font-bold">FREE</span>
+                      <div className="text-right">
+                        <span className="text-teal font-bold">FREE</span>
+                        <span className="text-[10px] text-muted-foreground line-through block -mt-0.5">₹{shippingCost}</span>
+                      </div>
                     ) : (
                       <span className="font-bold text-purple">₹{shippingCost}</span>
                     )}
