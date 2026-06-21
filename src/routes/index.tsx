@@ -253,7 +253,7 @@ function Index() {
         <div className="max-w-7xl mx-auto grid sm:grid-cols-3 gap-4">
           {[
             { c: "var(--teal)", t: "Free Shipping", s: "On orders ₹999+", icon: <Truck className="w-6 h-6" /> },
-            { c: "var(--orange)", t: "Cash on Delivery", s: "Available across India", icon: <ShoppingBag className="w-6 h-6" /> },
+            { c: "var(--orange)", t: "Delivery All Over India", s: "Available across India", icon: <ShoppingBag className="w-6 h-6" /> },
             { c: "var(--coral)", t: "Loved by 10k+", s: "5-star kawaii fans", icon: <Heart className="w-6 h-6" /> },
           ].map((b) => (
             <div key={b.t} className="rounded-3xl p-6 text-white flex items-center gap-4" style={{ backgroundColor: b.c }}>
