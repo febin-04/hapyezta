@@ -92,9 +92,13 @@ function ProductDetails() {
 
   return (
     <div className="min-h-screen bg-background pb-16 lg:pb-0">
-      {/* Top Banner strip */}
-      <div className="bg-purple text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
-        ✨  Delivery All Over India  ✨
+      {/* Top Banner strip – scrolling ticker */}
+      <div className="bg-purple text-white text-xs sm:text-sm py-2 font-medium overflow-hidden whitespace-nowrap">
+        <div className="banner-track">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i} className="px-12">✨&nbsp;&nbsp;Delivery All Over India&nbsp;&nbsp;✨</span>
+          ))}
+        </div>
       </div>
 
       {/* Header */}

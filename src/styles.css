@@ -113,3 +113,19 @@
 .animate-preloader-progress {
   animation: preloader-progress 1.6s infinite ease-in-out;
 }
+
+/* ── Marquee / ticker animation ── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.banner-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 18s linear infinite;
+}
+
+.banner-track:hover {
+  animation-play-state: paused;
+}
