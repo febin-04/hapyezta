@@ -51,11 +51,11 @@ function Contact() {
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
             <Link
               to="/"
-              className={`hover:opacity-90 transition py-1 ${
+              className={`inline-flex items-center justify-center shrink-0 hover:opacity-90 py-1 ${
                 isScrolled
                   ? "relative left-0 translate-x-0 lg:left-0 lg:translate-x-0"
                   : "relative left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0"
-              } transition-all duration-300`}
+              } transition-all duration-300 ease-in-out`}
             >
               <Logo size="sm" withSlogan={true} collapseOnScroll={true} isScrolled={isScrolled} className="items-center lg:items-start" />
             </Link>
