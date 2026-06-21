@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Search, Heart, Instagram, Star, Truck, Sparkles } from "lucide-react";
+import { Search, Heart, ShoppingBag, Instagram, Star, Truck, Sparkles } from "lucide-react";
 import { Header } from "@/components/Header";
 import { MarqueeBanner } from "@/components/MarqueeBanner";
 import { Footer } from "@/components/Footer";
