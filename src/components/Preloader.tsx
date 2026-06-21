@@ -4,8 +4,14 @@ import logoImg from "@/assets/logo.png";
 export function Preloader() {
   const [visible, setVisible] = useState(true);
   const [removed, setRemoved] = useState(false);
+  const [fontsReady, setFontsReady] = useState(false);
 
   useEffect(() => {
+    // Wait for all fonts to be fully loaded before showing text
+    document.fonts.ready.then(() => {
+      setFontsReady(true);
+    });
+
     // Show preloader for 1.4 seconds, then start fading out
     const timer = setTimeout(() => {
       setVisible(false);
@@ -42,8 +48,11 @@ export function Preloader() {
           <div className="absolute -inset-2 rounded-full border-4 border-yellow/20 animate-ping opacity-60" />
         </div>
 
-        {/* Brand Text */}
-        <h1 className="font-display text-3xl font-bold tracking-tight mb-1">
+        {/* Brand Text — only rendered once fonts are confirmed loaded */}
+        <h1
+          className="font-display text-3xl font-bold tracking-tight mb-1"
+          style={{ visibility: fontsReady ? "visible" : "hidden" }}
+        >
           <span className="text-orange">H</span>
           <span className="text-yellow">a</span>
           <span className="text-teal">p</span>
@@ -57,7 +66,10 @@ export function Preloader() {
         {/* Slogan */}
         <p
           className="text-[9px] uppercase tracking-[0.15em] font-bold text-orange mb-6"
-          style={{ fontFamily: "var(--font-display)" }}
+          style={{
+            fontFamily: "var(--font-display)",
+            visibility: fontsReady ? "visible" : "hidden",
+          }}
         >
           Where Happy Creation Begin
         </p>
