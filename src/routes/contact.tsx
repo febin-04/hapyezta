@@ -133,20 +133,20 @@ function Contact() {
 
           {/* Store Information Card */}
           <div className="w-full bg-white rounded-[2rem] p-8 border-2 border-yellow/20 shadow-[0_12px_40px_rgba(127,88,165,0.06)] max-w-xl mx-auto mt-8">
-            <h2 className="font-display text-xl sm:text-2xl text-purple font-bold mb-6 text-left">
+            <h2 className="font-display text-xl sm:text-2xl text-[#5B2D91] font-bold mb-6 text-left">
               Store Information
             </h2>
             <div className="space-y-5">
               {/* Phone item */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-cream border border-orange/20 flex items-center justify-center text-orange shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-full bg-cream border border-[#5B2D91]/20 flex items-center justify-center text-[#5B2D91] shrink-0 shadow-sm">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <span className="block font-display text-base text-purple font-bold">
+                  <span className="block font-display text-base text-[#5B2D91] font-bold">
                     Phone
                   </span>
-                  <a href="tel:+918921502990" className="text-sm text-foreground/75 hover:text-coral transition font-body">
+                  <a href="tel:+918921502990" className="text-sm text-foreground/75 hover:text-[#5B2D91] transition font-body">
                     +91 89215 02990
                   </a>
                 </div>
@@ -154,14 +154,14 @@ function Contact() {
 
               {/* Email item */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-cream border border-orange/20 flex items-center justify-center text-orange shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-full bg-cream border border-[#5B2D91]/20 flex items-center justify-center text-[#5B2D91] shrink-0 shadow-sm">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <span className="block font-display text-base text-purple font-bold">
+                  <span className="block font-display text-base text-[#5B2D91] font-bold">
                     Email
                   </span>
-                  <a href="mailto:hapyezta@gmail.com" className="text-sm text-foreground/75 hover:text-coral transition font-body">
+                  <a href="mailto:hapyezta@gmail.com" className="text-sm text-foreground/75 hover:text-[#5B2D91] transition font-body">
                     hapyezta@gmail.com
                   </a>
                 </div>
