@@ -56,10 +56,17 @@ export function Logo({
 
   React.useEffect(() => {
     if (!collapseOnScroll || controlledIsScrolled !== undefined) return;
+    let ticking = false;
     const handleScroll = () => {
-      setInternalIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setInternalIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [collapseOnScroll, controlledIsScrolled]);
 

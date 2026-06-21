@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Search, ShoppingBag, Heart, Instagram, Star, Truck, Sparkles } from "lucide-react";
-import { Logo } from "@/components/Logo";
+import { Search, Heart, Instagram, Star, Truck, Sparkles } from "lucide-react";
+import { Header } from "@/components/Header";
 import { MarqueeBanner } from "@/components/MarqueeBanner";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
@@ -68,15 +68,6 @@ function Index() {
   const { cartCount, openCart, addToCart } = useCart();
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const heroImages = [hero, heroSlide1, heroSlide2, heroSlide3];
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -88,40 +79,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background pb-16 lg:pb-0">
       <MarqueeBanner />
-
-      <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-          <a
-            href="/"
-            className={`inline-flex items-center justify-center shrink-0 hover:opacity-90 py-1 ${
-              isScrolled
-                ? "relative left-0 translate-x-0 lg:left-0 lg:translate-x-0"
-                : "relative left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0"
-            } transition-all duration-300 ease-in-out`}
-          >
-            <Logo size="sm" withSlogan={true} collapseOnScroll={true} isScrolled={isScrolled} className="items-center lg:items-start" />
-          </a>
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-foreground/80">
-            <a href="#collection" className="hover:text-coral transition">Shop</a>
-            <a href="#featured" className="hover:text-coral transition">New In</a>
-            <a href="#collection" className="hover:text-coral transition">Stationery</a>
-            <a href="#collection" className="hover:text-coral transition">Gift Sets</a>
-            <a href="#insta" className="hover:text-coral transition">Reviews</a>
-          </nav>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button className="p-2 hover:text-coral hidden lg:block"><Search className="w-5 h-5" /></button>
-            <button className="p-2 hover:text-coral hidden sm:block"><Heart className="w-5 h-5" /></button>
-            <button onClick={openCart} className="p-2 hover:text-coral relative hidden lg:block cursor-pointer">
-              <ShoppingBag className="w-5 h-5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center animate-fade-in">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="relative overflow-hidden">

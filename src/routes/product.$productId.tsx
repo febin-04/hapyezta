@@ -11,13 +11,9 @@ import {
   Check,
   AlertCircle,
   Sparkles,
-  Menu,
-  Search,
-  ShoppingBag,
-  Instagram
 } from "lucide-react";
 import { getProductById, products } from "@/lib/products";
-import { Logo } from "@/components/Logo";
+import { Header } from "@/components/Header";
 import { MarqueeBanner } from "@/components/MarqueeBanner";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
@@ -45,27 +41,11 @@ function ProductDetails() {
   );
   const [isFavorite, setIsFavorite] = useState(false);
   const [activeTab, setActiveTab] = useState("description"); // "description" | "details"
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   if (!product) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
-        {/* Header */}
-        <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
-          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <Link to="/" className="hover:opacity-90 transition py-1 mx-auto lg:mx-0">
-              <Logo size="sm" withSlogan={true} className="items-center lg:items-start" />
-            </Link>
-          </div>
-        </header>
+        <Header />
 
         <div className="flex-1 flex flex-col items-center justify-center px-4 py-16 text-center max-w-md mx-auto">
           <div className="w-24 h-24 rounded-full bg-coral/10 grid place-items-center text-4xl mb-6 select-none animate-bounce">
@@ -117,40 +97,7 @@ function ProductDetails() {
     <div className="min-h-screen bg-background pb-16 lg:pb-0">
       <MarqueeBanner />
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b-2 border-yellow/30">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-          <Link
-            to="/"
-            className={`inline-flex items-center justify-center shrink-0 hover:opacity-90 py-1 ${
-              isScrolled
-                ? "relative left-0 translate-x-0 lg:left-0 lg:translate-x-0"
-                : "relative left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0"
-            } transition-all duration-300 ease-in-out`}
-          >
-            <Logo size="sm" withSlogan={true} collapseOnScroll={true} isScrolled={isScrolled} className="items-center lg:items-start" />
-          </Link>
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-foreground/80">
-            <Link to="/" hash="collection" className="hover:text-coral transition">Shop</Link>
-            <Link to="/" hash="featured" className="hover:text-coral transition">New In</Link>
-            <Link to="/" hash="collection" className="hover:text-coral transition">Stationery</Link>
-            <Link to="/" hash="collection" className="hover:text-coral transition">Gift Sets</Link>
-            <Link to="/" hash="insta" className="hover:text-coral transition">Reviews</Link>
-          </nav>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button className="p-2 hover:text-coral hidden lg:block"><Search className="w-5 h-5" /></button>
-            <button className="p-2 hover:text-coral hidden sm:block"><Heart className="w-5 h-5" /></button>
-            <button onClick={openCart} className="p-2 hover:text-coral relative hidden lg:block cursor-pointer">
-              <ShoppingBag className="w-5 h-5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-coral text-white text-[10px] font-bold w-4 h-4 rounded-full grid place-items-center animate-fade-in">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Main product area */}
       <main className="max-w-7xl mx-auto px-4 py-8">
