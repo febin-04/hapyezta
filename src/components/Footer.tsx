@@ -15,28 +15,15 @@ function AccordionItem({ title, to, children }: AccordionItemProps) {
   if (to) {
     return (
       <div className="border-b border-[#E8DDF8]/20">
-        <div className="w-full flex items-center justify-between py-4">
-          <Link
-            to={to}
-            className="font-display text-lg font-bold text-orange hover:text-orange/80 transition"
-          >
-            {title}
-          </Link>
-          <button
-            onClick={toggle}
-            className="font-display font-bold text-orange text-2xl leading-none transition-transform duration-300 pl-4 cursor-pointer border-none bg-transparent outline-none focus:outline-none"
-            style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
-            aria-label={open ? "Collapse" : "Expand"}
-          >
-            +
-          </button>
-        </div>
-        <div
-          className="overflow-hidden transition-all duration-300"
-          style={{ maxHeight: open ? "400px" : "0px" }}
+        <Link
+          to={to}
+          className="w-full flex items-center justify-between py-4 text-left font-display text-lg font-bold text-orange hover:text-orange/80 transition cursor-pointer"
         >
-          <div className="pb-4 text-sm text-[#E8DDF8] space-y-2">{children}</div>
-        </div>
+          <span>{title}</span>
+          <span className="font-display font-bold text-orange text-2xl leading-none pl-4 select-none">
+            +
+          </span>
+        </Link>
       </div>
     );
   }
